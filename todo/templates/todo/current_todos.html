@@ -1,0 +1,26 @@
+{% extends 'todo/base.html' %}
+
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+        <p>CURRENT</p>
+        <ul>
+            {% for todo in todos %}
+                <li>Title: <a href="{% url 'detail_todo' todo.id %}">
+                {% if todo.important %}
+                    <b>{{ todo.title }}</b>
+                {% else %}
+                    {{ todo.title }}
+                {% endif %}
+                </a></li>
+                <p>Memo: {{ todo.memo }}</p>
+                <hr />
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>For show todo you must <a href="{% url 'login_user' %}">login</a></p>
+    {% endif %}
+
+
+{% endblock %}
